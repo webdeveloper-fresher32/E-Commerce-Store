@@ -1,0 +1,180 @@
+<nav
+  class="nav-bar bg-gradient-to-tr from-emerald-500 to-emerald-700 shadow-md"
+>
+  <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
+    <div class="relative flex items-center justify-between h-16">
+      <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
+        <button
+          type="button"
+          class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
+          aria-controls="mobile-menu"
+          aria-expanded="false"
+          (click)="toggleMobileMenu()"
+        >
+          <span class="sr-only">Open main menu</span>
+          <mat-icon>{{ mobileMenuOpen ? "close" : "menu" }}</mat-icon>
+        </button>
+      </div>
+      <div
+        class="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start"
+      >
+        <div class="flex-shrink-0">
+          <a href="/" class="text-2xl font-bold text-gray-900 font-serif">{{
+            logoName
+          }}</a>
+        </div>
+        <div class="hidden sm:block sm:ml-6">
+          <div class="flex space-x-4">
+            <a
+              routerLink="/"
+              class="text-gray-900 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+              >Home</a
+            >
+            <div class="relative group">
+              <button
+                class="text-gray-900 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+              >
+                Categories
+              </button>
+              <div
+                class="absolute left-0 mt-1 w-48 bg-white shadow-lg rounded-sm hidden group-hover:block z-10"
+              >
+                <a
+                  routerLink="/categories/Footware"
+                  class="block px-4 py-2 text-gray-700 hover:bg-gray-100"
+                  >Footware</a
+                >
+                <a
+                  routerLink="/categories/clothing"
+                  class="block px-4 py-2 text-gray-700 hover:bg-gray-100"
+                  >Clothing</a
+                >
+                <a
+                  routerLink="/categories/Electronics"
+                  class="block px-4 py-2 text-gray-700 hover:bg-gray-100"
+                  >Electronics</a
+                >
+                <a
+                  routerLink="/categories/computers"
+                  class="block px-4 py-2 text-gray-700 hover:bg-gray-100"
+                  >Computers</a
+                >
+                <a
+                  routerLink="/categories/Home"
+                  class="block px-4 py-2 text-gray-700 hover:bg-gray-100"
+                  >Home Appliances</a
+                >
+              </div>
+            </div>
+            <a
+              routerLink="/contact-us"
+              class="text-gray-900 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+              >Contact</a
+            >
+          </div>
+        </div>
+      </div>
+      <div
+        class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0"
+      >
+        <div class="relative text-gray-600">
+          <input
+            type="search"
+            #searchInput
+            name="search"
+            (keyup)="searchProducts($event)"
+            (blur)="hideSearch()"
+            placeholder="Search"
+            class="bg-gray-100 h-10 px-5 pr-10 rounded-full text-sm focus:outline-none"
+          />
+          <button
+            type="submit"
+            (click)="submitSearch(searchInput.value)"
+            class="absolute right-0 top-0 mt-3 mr-4"
+          >
+            <mat-icon>search</mat-icon>
+          </button>
+          <ul class="absolute bg-slate-200 mx-1 z-20" *ngIf="searchResult">
+            <li *ngFor="let item of searchResult">
+              <a
+                class="m-1 p-1 text-left grid cursor-pointer hover:bg-slate-300"
+                (mousedown)="redirecttoDetails(item.id)"
+              >
+                {{ item.productname }}</a
+              >
+            </li>
+          </ul>
+        </div>
+        <a
+          class="text-gray-900 bg-white mx-2 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+          routerLink="/cart-page"
+          >Cart({{ cartItems }})</a
+        >
+        <a>
+          <button
+            class="ml-3 bg-gray-100 text-gray-900 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+            (click)="logout()"
+          >
+            Logout
+          </button>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mobile menu, show/hide based on menu state. -->
+  <div class="sm:hidden" id="mobile-menu" *ngIf="mobileMenuOpen">
+    <div class="px-2 pt-2 pb-3 space-y-1">
+      <a
+        href="/"
+        class="block px-3 py-2 rounded-md text-base font-medium text-gray-900 hover:bg-gray-700 hover:text-white"
+        >Home</a
+      >
+      <a
+        href="/store"
+        class="block px-3 py-2 rounded-md text-base font-medium text-gray-900 hover:bg-gray-700 hover:text-white"
+        >Store</a
+      >
+      <div class="relative group">
+        <button
+          class="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-gray-900 hover:bg-gray-700 hover:text-white"
+        >
+          Categories
+        </button>
+        <div class="mt-1 pl-3 space-y-1 hidden group-hover:block">
+          <a
+            href="/categories/men"
+            class="block px-3 py-2 rounded-md text-base font-medium text-gray-900 hover:bg-gray-100"
+            >Men</a
+          >
+          <a
+            href="/categories/women"
+            class="block px-3 py-2 rounded-md text-base font-medium text-gray-900 hover:bg-gray-100"
+            >Women</a
+          >
+          <a
+            href="/categories/kids"
+            class="block px-3 py-2 rounded-md text-base font-medium text-gray-900 hover:bg-gray-100"
+            >Kids</a
+          >
+          <a
+            href="/categories/electronics"
+            class="block px-3 py-2 rounded-md text-base font-medium text-gray-900 hover:bg-gray-100"
+            >Electronics</a
+          >
+        </div>
+      </div>
+      <a
+        routerLink="/contact"
+        class="block px-3 py-2 rounded-md text-base font-medium text-gray-900 hover:bg-gray-700 hover:text-white"
+        >Contact</a
+      >
+      <button
+        id="logout-button"
+        class="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-gray-900 hover:bg-gray-700 hover:text-white"
+      >
+        Logout
+      </button>
+    </div>
+  </div>
+</nav>

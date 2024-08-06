@@ -1,0 +1,29 @@
+<app-nav-bar></app-nav-bar>
+
+<div class="mx-auto w-[500px] px-4 py-8">
+  <h1 class="text-2xl font-bold mb-4">Checkout</h1>
+
+  <div class="flex flex-col space-y-4">
+    <div *ngFor="let item of cartItems" class="border rounded-md p-4 bg-emerald-300">
+      <div class="flex justify-between">
+        <p class="font-bold">{{ item.productname }}</p>
+        <p class="text-gray-500">Qty: {{ item.quantity }}</p>
+      </div>
+      <p class="text-gray-500">Price: {{ item.price | currency }}</p>
+      <button class="btn btn-sm btn-danger" (click)="removeFromCart(item.id)">Remove</button>
+    </div>
+
+
+  </div>
+
+  <div class="mt-8">
+    <h2 class="text-xl font-bold mb-4">Shipping & Payment Information</h2>
+  </div>
+
+  <div class="mt-8 flex justify-between">
+    <p class="text-gray-500">Order Total: {{ totalPrice | currency }}</p>
+    <button class="bg-emerald-400 rounded-sm p-2 hover:bg-emerald-700 hover:text-white">Place Order</button>
+  </div>
+</div>
+
+<app-footer></app-footer>

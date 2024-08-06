@@ -1,0 +1,35 @@
+<app-nav-bar />
+<div class="container mx-auto p-4">
+    <h1 class="text-2xl font-bold mb-4">Shopping Cart</h1>
+    <div *ngIf="cartItems.length > 0; else emptyCart">
+        <div *ngFor="let item of cartItems"
+            class="flex items-center justify-between bg-white p-4 mb-4 rounded shadow-md">
+            <div class="flex items-center">
+                <img [src]="item.image" alt="{{ item.productname }}" class="w-16 h-16 rounded mr-4">
+                <div>
+                    <h2 class="font-semibold">{{ item.productname }}</h2>
+                    <p class="text-gray-600">${{ item.price }}</p>
+                </div>
+            </div>
+            <div class="flex items-center">
+                <button (click)="decreaseQuantity(item)" class="px-2 py-1 bg-gray-200 rounded-l">-</button>
+                <input type="number" [value]="item.quantity" readonly
+                    class="w-12 text-center border-t border-b border-gray-300">
+                <button (click)="increaseQuantity(item)" class="px-2 py-1 bg-gray-200 rounded-r">+</button>
+                <button (click)="removeFromCart(item.id)"
+                    class="ml-4 px-4 py-2 bg-red-500 text-white rounded">Remove</button>
+                <a [routerLink]="['/checkout']">
+                    <button class="ml-4 px-4 py-2 bg-green-500 text-white rounded">Checkout</button>
+                </a>
+            </div>
+        </div>
+        <div class="text-right font-bold">
+            Total: ${{ total }}
+        </div>
+    </div>
+    <ng-template #emptyCart>
+        <p class="text-gray-600">Your cart is empty.</p>
+    </ng-template>
+</div>
+
+<app-footer />

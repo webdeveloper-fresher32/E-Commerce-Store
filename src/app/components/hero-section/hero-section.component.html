@@ -1,0 +1,29 @@
+<app-nav-bar />
+<section class="main bg-white py-8">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <!-- Hero Banner -->
+    <div class="bg-gradient-to-r from-emerald-700 to-slate-500 text-white rounded-lg shadow-md overflow-hidden mb-8 ">
+      <div class="p-6 md:p-12">
+        <h2 class="text-3xl font-bold mb-2">Winter Sale</h2>
+        <p class="text-lg mb-6">Get up to 50% off on selected items!</p>
+        <a href="#" class="bg-white text-emerald-700 hover:bg-emerald-600 hover:text-white px-4 py-2 rounded-md ">Shop
+          Now</a>
+      </div>
+    </div>
+    <!-- Products Grid -->
+    <h3 class="text-2xl font-bold mb-6">Featured Products</h3>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+      <!-- Product Card -->
+      <div class="bg-white shadow-md rounded-lg overflow-hidden cursor-pointer" *ngFor="let item of products" [routerLink]="['/details', item.id]">
+        <img [src]="item.image" alt={{item.productname}}
+          class="w-full h-48 object-cover transition-transform duration-300 ease-in-out hover:scale-105 hover:translate-y-1">
+        <div class="p-4">
+          <h4 class="text-lg font-bold mb-2" [routerLink]="['/details', item.id]">{{item.productname}}</h4>
+          <p class="text-gray-600 mb-4">{{ item.price | currency: 'USD'}}</p>
+          <a [routerLink]="['/details', item.id]" class="text-emerald-700 hover:text-emerald-500">View Details</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<app-footer />
